@@ -60,6 +60,25 @@ th, td {
     border-radius: 20px;
     font-family: 'Lato', Arial, Helvetica, sans-serif;
   }
+
+  .sb-label {
+    font-family: 'Ubuntu', Arial, Helvetica, sans-serif;
+    font-size: 18px;
+    font-weight: 500;
+    margin-bottom: 0.5rem;
+    color: #1a625b;
+  }
+
+  .sb-select {
+    border: 1px solid gray;
+    border-radius: 10px;
+    font-family: 'Lato', Arial, Helvetica, sans-serif;
+    font-size: 15px;
+    padding: 0.5rem 1rem;
+    color: #1a625b;
+    text-align: left;
+
+  }
 }
 
 .data-viewer {

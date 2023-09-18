@@ -69,7 +69,7 @@ function SearchBar({ onSearch }) {
   const handleProvinsiChange = (e) => {
     const selectedProvinsi = e.target.value;
     setSelectedProvince(selectedProvinsi);
-    setFormData({ ...formData, province: selectedProvinsi });
+    setFormData({ ...formData, province: selectedProvinsi, city: '' });
   };
 
   const handleCityChange = (e) => {
@@ -98,10 +98,10 @@ function SearchBar({ onSearch }) {
           />
         </InputGroup>
         <div className='col-12 col-md-4 col-lg-4'>
-          <label htmlFor="province" className='af-label col-12'>Provinsi</label>
+          <label htmlFor="province" className='sb-label col-12'>Provinsi</label>
           <br />
           <select
-            className='af-select col-12'
+            className='sb-select col-12'
             id="province"
             name="province"
             value={formData.province}
@@ -118,14 +118,14 @@ function SearchBar({ onSearch }) {
         </div>
         
         <div className='col-12 col-md-4 col-lg-4'>
-          <label htmlFor="city" className='af-label col-12'>Kota</label>
+          <label htmlFor="city" className='sb-label col-12'>Kota</label>
           <br />
           <select
             id="city"
             name="city"
             value={formData.city}
             onChange={handleCityChange}
-            className='af-select col-12'
+            className='sb-select col-12'
             required
           >
             <option value="">Select Kota</option>
@@ -138,14 +138,14 @@ function SearchBar({ onSearch }) {
         </div>
 
         <div className='af-elmt col-12 col-md-4 col-lg-4'>
-            <label htmlFor="size" className='af-label col-12'>Size</label>
+            <label htmlFor="size" className='sb-label col-12'>Size</label>
             <br />
             <select
               id="size"
               name="size"
               value={formData.size}
               onChange={handleSizeChange}
-              className='af-select'
+              className='sb-select'
               required
             >
               <option value="">Select Size</option>
