@@ -5,6 +5,8 @@ import SearchBar from './SearchBar';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faSort, faSortUp, faSortDown } from '@fortawesome/free-solid-svg-icons';
 
+import { BeatLoader } from 'react-spinners';
+
 const SteinStore = require("stein-js-client");
 
 function DataViewer() {
@@ -144,17 +146,25 @@ function DataViewer() {
             </th>
           </tr>
         </thead>
-        <tbody>
-          {currentItems.map((item) => (
-            <tr key={item.uuid} className='dv-element'>
-              <td>{item.komoditas}</td>
-              <td>{item.area_provinsi}</td>
-              <td>{item.area_kota}</td>
-              <td>{item.size}</td>
-              <td>{item.price}</td>
-            </tr>
-          ))}
-        </tbody>
+        {!(data.length > 0) ? (
+          <tr class='dv-loader-container'>
+            <BeatLoader color="#36d7b7" className='dv-loader d-flex justify-content-center'/>
+          </tr>
+        )
+        : (
+          <tbody>
+            {currentItems.map((item) => (
+              <tr key={item.uuid} className='dv-element'>
+                <td>{item.komoditas}</td>
+                <td>{item.area_provinsi}</td>
+                <td>{item.area_kota}</td>
+                <td>{item.size}</td>
+                <td>{item.price}</td>
+              </tr>
+            ))}
+          </tbody>
+        )}
+        
       </table>
       
       <nav aria-label="Page navigation" className='data-pagination-container'>
@@ -163,16 +173,11 @@ function DataViewer() {
             <li
               key={index}
               className={`dp-page page-item ${currentPage === index + 1 ? 'active' : ''}`}
+              onClick={() => {
+                handlePageChange(index + 1)
+              }}
             >
-              <button 
-               variant="secondary"
-                className="btn page-link"
-                onClick={() => {
-                  handlePageChange(index + 1)
-                }}
-              >
-                {index + 1}
-              </button>
+              {index + 1}
             </li>
           ))}
         </ul>
