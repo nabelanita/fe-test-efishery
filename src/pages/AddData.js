@@ -109,7 +109,7 @@ function AddData() {
           </div>
           <div className='col-12'>
             <div className='row'>
-              <div className='af-elmt col-12 col-md-6 col-lg-12'>
+              <div className='af-elmt col-12 col-md-6 col-lg-6'>
                 <label htmlFor="province" className='af-label col-12'>Provinsi</label>
                 <br />
                 <select
@@ -128,7 +128,7 @@ function AddData() {
                 ))}
                 </select>
               </div>
-              <div className='af-elmt col-12 col-md-6 col-lg-12'>
+              <div className='af-elmt col-12 col-md-6 col-lg-6'>
                 <label htmlFor="city" className='af-label col-12'>Kota</label>
                 <br />
                 <select

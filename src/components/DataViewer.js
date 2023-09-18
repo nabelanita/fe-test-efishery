@@ -16,6 +16,12 @@ function DataViewer() {
   const [currentPage, setCurrentPage] = useState(1);
   const [sortConfig, setSortConfig] = useState({ key: null, direction: 'default' });
 
+  const [query, setQuery] = useState({})
+
+  const [provinsiOptions, setProvinsiOptions] = useState([]);
+  const [kotaOptions, setKotaOptions] = useState({});
+  const [sizeOptions, setSizeOptions] = useState([]);
+
   const itemsPerPage = 20; // Change this as needed
   
   useEffect(() => {
@@ -33,6 +39,32 @@ function DataViewer() {
         console.error("Error fetching data:", error);
       });
   }, []);
+
+  useEffect(() => {
+    var filtered = data;
+    if (query.komoditas) {
+      const regex = new RegExp(query.komoditas, 'i');
+      filtered = filtered.filter((item) => regex.test(item.komoditas)); 
+      setFilteredData(filtered);
+    }
+
+    if (query.province) {
+      filtered = filtered.filter((item) => item.area_provinsi === query.province);
+      setFilteredData(filtered);
+    }
+
+    if (query.city) {
+      filtered = filtered.filter((item) => item.area_kota === query.city);
+      setFilteredData(filtered);
+    }
+
+    if (query.size) {
+      filtered = filtered.filter((item) => item.size === query.size);
+      setFilteredData(filtered);
+    }
+
+  }, [query, filteredData])
+  
 
   const handlePageChange = (pageNumber) => {
     setCurrentPage(pageNumber);
@@ -77,18 +109,10 @@ function DataViewer() {
   };
 
   const handleSearch = (query) => {
-    const regex = new RegExp(query, 'i');
-    // const filtered = data.filter((item) => regex.test(item.komoditas)); 
-    const filtered = data.filter((item) => {
-      return Object.values(item).some((value) =>
-        regex.test(String(value))
-      );
-    });
-    setFilteredData(filtered);
+    setQuery(query)
   };
 
   const renderSortIcon = (col) => {
-    console.log(sortConfig.direction)
     if (sortConfig.key === col) {
       if (sortConfig.direction === 'asc') {
         return <FontAwesomeIcon className='dv-sort-icon' icon={faSortDown} />;
