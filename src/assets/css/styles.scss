@@ -1,5 +1,6 @@
-@import '_fonts.scss';
-@import '_variables.scss';
+@import '_fonts';
+@import '_variables';
+@import '_mixins';
 
 .navbar {
   background-color: #22867c;
@@ -109,9 +110,17 @@ th, td {
 .data-pagination-container {
   margin-top: 2rem;
   border: none;
+
+
   .dp-outer {
+    display: flex;
+    flex-wrap: wrap; /* Enable flexbox wrap */
+    overflow: wrap;
+    max-width: 100%;
+    
     text-decoration: none;
     list-style: none;
+    justify-content: center;
     .dp-page {
       text-align: center;
       margin-right: 1rem;
@@ -220,4 +229,64 @@ th, td {
 
   
 
+}
+
+@include viewport(mobile-down) {
+  .navbar {
+    padding: 15px;
+    z-index: 9999;
+    
+    
+    .nav-elmt {
+      margin-right: 0rem;
+      margin-left: 0rem;
+      margin-top: 15px;
+      text-align: center;
+
+    }
+  
+  }
+
+  .search-bar {
+    border-radius: 10px;
+    padding: 2px 15px;
+  
+    .sb-title {
+      font-size: 15px;
+      margin-top: 10px;
+      margin-bottom: 10px;
+    }
+  
+    .sb-field {
+      padding: 5px 15px;
+      border-radius: 10px;
+      font-size: 15px;
+      margin-bottom: 2px;
+    }
+  }
+
+  .data-viewer {
+    border-radius: 10px;
+    padding: 0rem 0.2rem;
+    overflow: hidden;
+  
+    min-height: 100vh;
+  
+    .dv-header {
+      padding: 10px 0px;
+      font-size: 10px;
+      .dv-sort-icon {
+        margin-left: 2px;
+      }
+    }
+  
+    .dv-element {
+      padding: 5px 2px;
+      text-align: center;
+      font-size: 10px;
+    }
+    
+  }
+
+  
 }

@@ -168,7 +168,7 @@ function DataViewer() {
       </table>
       
       <nav aria-label="Page navigation" className='data-pagination-container'>
-        <ul className="d-flex justify-content-center dp-outer">
+        <ul className="dp-outer">
           {Array.from({ length: Math.ceil(data.length / itemsPerPage) }).map((_, index) => (
             <li
               key={index}

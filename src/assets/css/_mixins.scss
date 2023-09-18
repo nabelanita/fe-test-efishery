@@ -1,0 +1,93 @@
+@mixin viewport($device) {
+  // @device DESKTOP-LARGE
+  @if $device == desktop-large {
+    @media only screen and (min-width: 1440px) {
+      @content;
+    }
+  }
+  @else if $device == desktop-large-down {
+    @media only screen and (min-width: 320px) {
+      @content;
+    }
+  }
+
+  // @device DESKTOP
+  @else if $device == desktop {
+    @media only screen and (max-width: 1439px) and (min-width: 1200px) {
+      @content;
+    }
+  }
+  @else if $device == desktop-up {
+    @media only screen and (min-width: 1200px) {
+      @content;
+    }
+  }
+  @else if $device == desktop-down {
+    @media only screen and (max-width: 1439px) and (min-width: 320px) {
+      @content;
+    }
+  }
+
+  // @device TABLET
+  @else if $device == tablet {
+    @media only screen and (max-width: 1199.98px) and (min-width: 992px) {
+      @content;
+    }
+  }
+  @else if $device == tablet-up {
+    @media only screen and (min-width: 992px) {
+      @content;
+    }
+  }
+  @else if $device == tablet-down {
+    @media only screen and (max-width: 1199.98px) {
+      @content;
+    }
+  }
+
+  // @device TABLET-PORTRAIT
+  @else if $device == tablet-portrait {
+    @media only screen and (max-width: 991.98px) and (min-width: 768px) {
+      @content;
+    }
+  }
+  @else if $device == tablet-portrait-up {
+    @media only screen and (min-width: 768px) {
+      @content;
+    }
+  }
+  @else if $device == tablet-portrait-down {
+    @media only screen and (max-width: 991.98px) {
+      @content;
+    }
+  }
+
+  // @device MOBILE
+  @else if $device == mobile {
+    @media only screen and (max-width: 767.98px) and (min-width: 480px) {
+      @content;
+    }
+  }
+  @else if $device == mobile-up {
+    @media only screen and (min-width: 480px) {
+      @content;
+    }
+  }
+  @else if $device == mobile-down {
+    @media only screen and (max-width: 767.98px) {
+      @content;
+    }
+  }
+
+  // @device MOBILE-PORTRAIT
+  @else if $device == mobile-portrait {
+    @media only screen and (max-width: 479.98px) and (min-width: 320px) {
+      @content;
+    }
+  }
+  @else if $device == mobile-portrait-up {
+    @media only screen and (min-width: 320px) {
+      @content;
+    }
+  }
+}
