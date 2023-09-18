@@ -196,7 +196,7 @@ function DataViewer() {
       
       <nav aria-label="Page navigation" className='data-pagination-container'>
         <ul className="dp-outer">
-          {Array.from({ length: Math.ceil(data.length / itemsPerPage) }).map((_, index) => (
+          {Array.from({ length: Math.ceil(filteredData.length / itemsPerPage) }).map((_, index) => (
             <li
               key={index}
               className={`dp-page page-item ${currentPage === index + 1 ? 'active' : ''}`}
