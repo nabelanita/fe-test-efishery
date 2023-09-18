@@ -63,7 +63,11 @@ function DataViewer() {
       setFilteredData(filtered);
     }
 
-  }, [query, filteredData])
+  }, [query])
+  
+  useEffect(() => {
+    sortData();
+  }, [sortConfig])
   
 
   const handlePageChange = (pageNumber) => {
@@ -90,7 +94,7 @@ function DataViewer() {
       }
     });
     if (sortConfig.direction === 'default') {
-      setFilteredData(filteredData);
+      setFilteredData(data);
     } else {
       setFilteredData(sorted);
     }
@@ -105,7 +109,6 @@ function DataViewer() {
     }
 
     setSortConfig({ key, direction });
-    sortData();
   };
 
   const handleSearch = (query) => {
