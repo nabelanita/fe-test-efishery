@@ -11,8 +11,6 @@ function DataViewer() {
   const [data, setData] = useState([]);
   const [filteredData, setFilteredData] = useState(data); // Filtered data
 
-  const [currentData, setCurrentData] = useState([]);
-
   const [currentPage, setCurrentPage] = useState(1);
   const [sortConfig, setSortConfig] = useState({ key: null, direction: 'default' });
 
@@ -26,7 +24,7 @@ function DataViewer() {
     store.read("list")
       .then(data => {
         setData(data);
-        setCurrentData(data);
+        setFilteredData(data);
       })
       .catch((error) => {
         // Handle error
@@ -107,7 +105,7 @@ function DataViewer() {
   return (
     <div>
       <SearchBar onSearch={handleSearch}/>
-        <br />
+      <br />
       <table className="table">
         <thead>
           <tr>
@@ -156,7 +154,7 @@ function DataViewer() {
       
       <nav aria-label="Page navigation">
       <ul className="pagination">
-        {Array.from({ length: Math.ceil(currentData.length / itemsPerPage) }).map((_, index) => (
+        {Array.from({ length: Math.ceil(data.length / itemsPerPage) }).map((_, index) => (
           <li
             key={index}
             className={`page-item ${currentPage === index + 1 ? 'active' : ''}`}

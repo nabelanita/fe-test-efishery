@@ -1,20 +1,18 @@
-import logo from './logo.svg';
 import './App.css'; 
-
+import { BrowserRouter, Route, Routes } from 'react-router-dom';
+import Home from './pages/Home';
+import AddData from './pages/AddData'
 import NavigationBar from './components/NavigationBar';
-
-import Container from 'react-bootstrap/Container';
-import DataViewer from './components/DataViewer';
 
 function App() {
   return (
-    <div className="App">
-      <NavigationBar />
-      <br />
-      <Container>
-        <DataViewer />
-      </Container>
-    </div>
+    <BrowserRouter>
+    <NavigationBar />
+      <Routes>
+        <Route path="/" element={<Home />} />
+        <Route path="/add" element={<AddData />} />
+      </Routes>
+    </BrowserRouter>
   );
 }
 
