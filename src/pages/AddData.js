@@ -5,7 +5,6 @@ import Container from 'react-bootstrap/Container';
 const SteinStore = require("stein-js-client");
 
 function AddData() {
-  // Define state variables to store form input values
   const [formData, setFormData] = useState({
     komoditas: '',
     province: '',
@@ -20,6 +19,10 @@ function AddData() {
 
   const [selectedProvince, setSelectedProvince] = useState('');
 
+  const url = "https://stein.efishery.com/v1/storages/5e1edf521073e315924ceab4";
+
+  const store = new SteinStore(url);
+
   // Event handler for form input changes
   const handleInputChange = (e) => {
     const { name, value } = e.target;
@@ -27,16 +30,12 @@ function AddData() {
   };
 
   useEffect(() => {
-    const url = "https://stein.efishery.com/v1/storages/5e1edf521073e315924ceab4";
-
-    const store = new SteinStore(url);
-
     store.read("option_size")
       .then((data) => {
         const size =  Array.from(
           new Set(data.map((item) => Number(item.size)))
         ).sort((a, b) => a - b); 
-        
+
         setSizeOptions(size);
       })
       .catch((error) => {
@@ -57,14 +56,10 @@ function AddData() {
           provinceCityMap[province].push(city);
         });
 
-        // Set the provinsiOptions to the unique province values
         setProvinsiOptions(Object.keys(provinceCityMap));
-        
-        // Set the kotaOptions object
         setKotaOptions(provinceCityMap);
       })
       .catch((error) => {
-        // Handle error
         console.error("Error fetching data:", error);
       });
 
@@ -76,11 +71,21 @@ function AddData() {
     setFormData({ ...formData, province: selectedProvinsi });
   };
   
-
-  // Submit handler
   const handleSubmit = (e) => {
     e.preventDefault();
-    console.log(formData);
+    // store
+    // .append("list", [
+    //   {
+    //     komoditas: formData.komoditas,
+    //     area_provinsi: formData.province,
+    //     area_kota: formData.city,
+    //     size: formData.size,
+    //     price: formData.price
+    //   }
+    // ])
+    // .then(res => {
+    //   console.log(res);
+    // });
   };
 
   return (

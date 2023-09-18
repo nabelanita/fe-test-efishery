@@ -89,12 +89,12 @@ function DataViewer() {
     console.log(sortConfig.direction)
     if (sortConfig.key === col) {
       if (sortConfig.direction === 'asc') {
-        return <FontAwesomeIcon icon={faSortDown} />;
+        return <FontAwesomeIcon className='dv-sort-icon' icon={faSortDown} />;
       } else if (sortConfig.direction === 'desc') {
-        return <FontAwesomeIcon icon={faSortUp} />;
+        return <FontAwesomeIcon className='dv-sort-icon' icon={faSortUp} />;
       }
     }
-    return <FontAwesomeIcon icon={faSort} />;
+    return <FontAwesomeIcon className='dv-sort-icon' icon={faSort} />;
   };
 
   const indexOfLastItem = currentPage * itemsPerPage;
@@ -106,33 +106,38 @@ function DataViewer() {
     <div>
       <SearchBar onSearch={handleSearch}/>
       <br />
-      <table className="table">
+      <table className="table data-viewer">
         <thead>
           <tr>
             <th scope="col" 
             onClick={() => handleSort('komoditas')}
+            className='dv-header'
             >
               Komoditas 
               {renderSortIcon('komoditas')}
               </th>
             <th scope="col" 
             onClick={() => handleSort('area_provinsi')}
+            className='dv-header'
             >
               Provinsi
               {renderSortIcon('area_provinsi')}
             </th>
             <th scope="col" 
             onClick={() => handleSort('area_kota')}
+            className='dv-header'
             >
               Kota
               {renderSortIcon('area_kota')}
             </th>
             <th scope="col" onClick={() => handleSort('size')}
+            className='dv-header'
             >
               Ukuran
               {renderSortIcon('size')}
               </th>
             <th scope="col" onClick={() => handleSort('price')}
+            className='dv-header'
             >
               Harga
               {renderSortIcon('price')}
@@ -141,7 +146,7 @@ function DataViewer() {
         </thead>
         <tbody>
           {currentItems.map((item) => (
-            <tr key={item.uuid}>
+            <tr key={item.uuid} className='dv-element'>
               <td>{item.komoditas}</td>
               <td>{item.area_provinsi}</td>
               <td>{item.area_kota}</td>
@@ -152,25 +157,26 @@ function DataViewer() {
         </tbody>
       </table>
       
-      <nav aria-label="Page navigation">
-      <ul className="pagination">
-        {Array.from({ length: Math.ceil(data.length / itemsPerPage) }).map((_, index) => (
-          <li
-            key={index}
-            className={`page-item ${currentPage === index + 1 ? 'active' : ''}`}
-          >
-            <button
-              className="page-link"
-              onClick={() => {
-                handlePageChange(index + 1)
-              }}
+      <nav aria-label="Page navigation" className='data-pagination-container'>
+        <ul className="d-flex justify-content-center dp-outer">
+          {Array.from({ length: Math.ceil(data.length / itemsPerPage) }).map((_, index) => (
+            <li
+              key={index}
+              className={`dp-page page-item ${currentPage === index + 1 ? 'active' : ''}`}
             >
-              {index + 1}
-            </button>
-          </li>
-        ))}
-      </ul>
-    </nav>
+              <button 
+               variant="secondary"
+                className="btn page-link"
+                onClick={() => {
+                  handlePageChange(index + 1)
+                }}
+              >
+                {index + 1}
+              </button>
+            </li>
+          ))}
+        </ul>
+      </nav>
       
     </div>
   );

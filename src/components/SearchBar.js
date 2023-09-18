@@ -12,14 +12,17 @@ function SearchBar({ onSearch }) {
   };
 
   return (
-    <InputGroup className="mb-3">
-      <FormControl
-        placeholder="Cari komoditas/area/ukuran"
-        aria-label="Search"
-        aria-describedby="search-button"
-        onChange={handleSearch}
-      />
-    </InputGroup>
+    <div className='search-bar'>
+      <h3 className='sb-title'>Cari data</h3>
+      <InputGroup className="mb-3">
+        <FormControl className='sb-field'
+          placeholder="Cari komoditas / area / ukuran"
+          aria-label="Search"
+          aria-describedby="search-button"
+          onChange={handleSearch}
+        />
+      </InputGroup>
+    </div>
   );
 }
 

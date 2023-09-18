@@ -7,14 +7,14 @@ import Container from 'react-bootstrap/Container';
 
 function NavigationBar() {
   return (
-    <Navbar expand="lg" className="bg-body-tertiary">
+    <Navbar expand="lg" className="navbar">
       <Container>
-        <Navbar.Brand href="#home">FE Test eFishery</Navbar.Brand>
+        <Navbar.Brand className="nav-brand">FE Test eFishery</Navbar.Brand>
         <Navbar.Toggle aria-controls="basic-navbar-nav" />
         <Navbar.Collapse id="basic-navbar-nav">
-          <Nav className="me-auto">
-            <Link to="/">Home</Link>
-            <Link to="/add">Tambah Data</Link>
+          <Nav>
+            <Link to="/" className="nav-elmt nav-home">Home</Link>
+            <Link to="/add" className="nav-elmt nav-add">Tambah Data</Link>
           </Nav>
         </Navbar.Collapse>
       </Container>
