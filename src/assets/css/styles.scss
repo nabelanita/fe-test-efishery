@@ -274,7 +274,7 @@ th, td {
 
   .search-bar {
     border-radius: 10px;
-    padding: 2px 15px;
+    padding: 10px 15px;
   
     .sb-title {
       font-size: 15px;
@@ -287,6 +287,17 @@ th, td {
       border-radius: 10px;
       font-size: 15px;
       margin-bottom: 2px;
+    }
+
+    .sb-label {
+      font-size: 12px;
+      margin-bottom: 5px;
+    }
+  
+    .sb-select {
+      font-size: 12px;
+      margin-bottom: 5px;
+  
     }
   }
 

@@ -181,7 +181,7 @@ function DataViewer() {
             <BeatLoader color="#36d7b7" className='dv-loader d-flex justify-content-center'/>
           </tr>
         )
-        : (
+        : (      
           <tbody>
             {currentItems.map((item) => (
               <tr key={item.uuid} className='dv-element'>
