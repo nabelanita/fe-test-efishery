@@ -1,5 +1,7 @@
 import React, { useState, useEffect } from 'react';
-import axios from "axios";
+
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faSort, faSortUp, faSortDown } from '@fortawesome/free-solid-svg-icons';
 
 const SteinStore = require("stein-js-client");
 
@@ -7,6 +9,8 @@ function DataViewer() {
   const [data, setData] = useState([]);
   const [currentData, setCurrentData] = useState([]);
   const [currentPage, setCurrentPage] = useState(1);
+  const [sortConfig, setSortConfig] = useState({ key: null, direction: 'default' });
+
   const itemsPerPage = 20; // Change this as needed
   
   useEffect(() => {
@@ -16,7 +20,6 @@ function DataViewer() {
 
     store.read("list")
       .then(data => {
-        console.log(data)
         setData(data);
         setCurrentData(data);
       })
@@ -26,81 +29,99 @@ function DataViewer() {
       });
   }, []);
 
-  const indexOfLastItem = currentPage * itemsPerPage;
-  const indexOfFirstItem = indexOfLastItem - itemsPerPage;
-  const currentItems = currentData.slice(indexOfFirstItem, indexOfLastItem);
-
   const handlePageChange = (pageNumber) => {
     setCurrentPage(pageNumber);
   };
 
-  const sortAlphabet = () => {
-    const col = "komoditas"
+  const sortData = () => {
+    const col = sortConfig.key
     const sorted = [...data].sort((a, b) => {
       if (a[col] && b[col]) {
-        return a[col].localeCompare(b[col])
+        if (sortConfig.direction === 'asc') {
+          return a[col].localeCompare(b[col], undefined, {
+            numeric: true,
+            sensitivity: 'base',
+          })
+        } else if (sortConfig.direction === 'desc') {
+          return -1 * a[col].localeCompare(b[col], undefined, {
+            numeric: true,
+            sensitivity: 'base',
+          })
+        }
       } else {
         return 1
       }
     });
-    setData(sorted);
-    setCurrentData(sorted);
+    if (sortConfig.direction === 'default') {
+      setCurrentData(data);
+    } else {
+      setCurrentData(sorted);
+    }
   }
 
-  const sortAlphabetReverse = () => {
-    const col = "komoditas"
-    const sorted = [...data].sort((a, b) => {
-      if (a[col] && b[col]) {
-        return -1 * a[col].localeCompare(b[col])
-      } else {
-        return -1
-      }
-    });
-    setData(sorted);
-    setCurrentData(sorted);
-  }
+  const handleSort = (key) => {
+    let direction = 'default';
+    if (sortConfig.direction === 'default') {
+      direction = 'asc';
+    } else if (sortConfig.direction === 'asc') {
+      direction = 'desc';
+    }
 
-  const sortNumber = () => {
-    const col = "price"
-    const sorted = [...data].sort((a, b) => {
-      if (a[col] && b[col]) {
-        return a[col].localeCompare(b[col], undefined, { numeric: true })
-      } else {
-        return 1
-      }
-    });
-    setData(sorted);
-    setCurrentData(sorted);
+    setSortConfig({ key, direction });
+    sortData();
   };
 
-  const sortNumberReverse = () => {
-    const col = "price"
-    const sorted = [...data].sort((a, b) => {
-      if (a[col] && b[col]) {
-        return -1 * a[col].localeCompare(b[col], undefined, { numeric: true })
-      } else {
-        return -1
+  const renderSortIcon = (col) => {
+    console.log(sortConfig.direction)
+    if (sortConfig.key === col) {
+      if (sortConfig.direction === 'asc') {
+        return <FontAwesomeIcon icon={faSortDown} />;
+      } else if (sortConfig.direction === 'desc') {
+        return <FontAwesomeIcon icon={faSortUp} />;
       }
-    });
-    setData(sorted);
-    setCurrentData(sorted);
+    }
+    return <FontAwesomeIcon icon={faSort} />;
   };
+
+  const indexOfLastItem = currentPage * itemsPerPage;
+  const indexOfFirstItem = indexOfLastItem - itemsPerPage;
+  const currentItems = currentData.slice(indexOfFirstItem, indexOfLastItem);
 
 
   return (
     <div>
-      <button onClick={sortAlphabetReverse}>Sort Alphabet (Descending)</button>
-      <button onClick={sortAlphabet}>Sort Alphabet (Ascending)</button>
-      <button onClick={sortNumberReverse}>Sort Harga (Descending)</button>
-      <button onClick={sortNumber}>Sort Harga (Ascending)</button>
+      
       <table className="table">
         <thead>
           <tr>
-            <th scope="col">Komoditas</th>
-            <th scope="col">Provinsi</th>
-            <th scope="col">Kota</th>
-            <th scope="col">Ukuran</th>
-            <th scope="col">Harga</th>
+            <th scope="col" 
+            onClick={() => handleSort('komoditas')}
+            >
+              Komoditas 
+              {renderSortIcon('komoditas')}
+              </th>
+            <th scope="col" 
+            onClick={() => handleSort('area_provinsi')}
+            >
+              Provinsi
+              {renderSortIcon('area_provinsi')}
+            </th>
+            <th scope="col" 
+            onClick={() => handleSort('area_kota')}
+            >
+              Kota
+              {renderSortIcon('area_kota')}
+            </th>
+            <th scope="col" onClick={() => handleSort('size')}
+            >
+              Ukuran
+              {renderSortIcon('size')}
+              </th>
+            <th scope="col" onClick={() => handleSort('price')}
+            >
+              Harga
+              {renderSortIcon('price')}
+            </th>
           </tr>
         </thead>
         <tbody>

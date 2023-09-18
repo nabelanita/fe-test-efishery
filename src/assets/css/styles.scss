@@ -1,0 +1,27 @@
+.sort-arrow {
+  width: 0;
+  height: 0;
+  margin-left: 5px;
+  display: inline-block;
+  vertical-align: middle;
+}
+
+.sort-asc::after {
+  content: "";
+  border-width: 0.2em 0.2em 0 0.2em;
+  border-color: transparent transparent #000;
+  border-style: solid;
+  display: inline-block;
+  transform: translateY(-25%);
+  margin-left: 5px;
+}
+
+.sort-desc::after {
+  content: "";
+  border-width: 0 0.2em 0.2em 0.2em;
+  border-color: #000 transparent transparent transparent;
+  border-style: solid;
+  display: inline-block;
+  transform: translateY(25%);
+  margin-left: 5px;
+}
