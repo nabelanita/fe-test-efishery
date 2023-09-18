@@ -89,86 +89,97 @@ function AddData() {
   };
 
   return (
-    <div className="Home">
+    <div className="add-form">
       <Container>
-        <h3>Tambah Data Baru</h3>
-        <hr />
-        <form onSubmit={handleSubmit}>
-          <div>
-            <label htmlFor="komoditas">Komoditas:</label>
-            <input
-              type="text"
-              id="komoditas"
-              name="komoditas"
-              value={formData.komoditas}
-              onChange={handleInputChange}
-              required
-            />
-          </div>
-          <div>
-            <label htmlFor="province">Provinsi:</label>
-            <select
-              id="province"
-              name="province"
-              value={formData.province}
-              onChange={handleProvinsiChange}
-              required
-            >
-              <option value="">Select Provinsi</option>
-              {provinsiOptions.map((option) => (
-              <option key={option} value={option}>
-                {option}
-              </option>
-            ))}
-            </select>
-          </div>
-          <div>
-            <label htmlFor="city">Kota:</label>
-            <select
-              id="city"
-              name="city"
-              value={formData.city}
-              onChange={handleInputChange}
-              required
-            >
-              <option value="">Select Kota</option>
-              {kotaOptions[selectedProvince]?.map((city) => (
-              <option key={city} value={city}>
-                {city}
-              </option>
-            ))}
-            </select>
-          </div>
-          <div>
-            <label htmlFor="size">Size:</label>
-            <select
-              id="size"
-              name="size"
-              value={formData.size}
-              onChange={handleInputChange}
-              required
-            >
-              <option value="">Select Size</option>
-              {sizeOptions.map((size) => (
-                <option key={size} value={size}>
-                  {size}
+        <h3 className='af-title'>Tambah Data Baru</h3>
+        <div className='af-container d-flex justify-content-center'>
+          <form onSubmit={handleSubmit} className='af-form'>
+            <div className='af-elmt'>
+              <label htmlFor="komoditas" className='af-label'>Komoditas</label>
+              <br />
+              <input
+                className='af-text'
+                type="text"
+                id="komoditas"
+                name="komoditas"
+                value={formData.komoditas}
+                onChange={handleInputChange}
+                required
+              />
+            </div>
+            <div className='af-elmt'>
+              <label htmlFor="province" className='af-label'>Provinsi</label>
+              <br />
+              <select
+                className='af-select'
+                id="province"
+                name="province"
+                value={formData.province}
+                onChange={handleProvinsiChange}
+                required
+              >
+                <option value="">Select Provinsi</option>
+                {provinsiOptions.map((option) => (
+                <option key={option} value={option}>
+                  {option}
                 </option>
               ))}
-            </select>
-          </div>
-          <div>
-            <label htmlFor="price">Harga:</label>
-            <input
-              type="number"
-              id="price"
-              name="price"
-              value={formData.price}
-              onChange={handleInputChange}
-              required
-            />
-          </div>
-          <button type="submit">Submit</button>
-        </form>
+              </select>
+            </div>
+            <div  className='af-elmt'>
+              <label htmlFor="city" className='af-label'>Kota</label>
+              <br />
+              <select
+                id="city"
+                name="city"
+                value={formData.city}
+                onChange={handleInputChange}
+                className='af-select'
+                required
+              >
+                <option value="">Select Kota</option>
+                {kotaOptions[selectedProvince]?.map((city) => (
+                <option key={city} value={city}>
+                  {city}
+                </option>
+              ))}
+              </select>
+            </div>
+            <div className='af-elmt'>
+              <label htmlFor="size" className='af-label'>Size</label>
+              <br />
+              <select
+                id="size"
+                name="size"
+                value={formData.size}
+                onChange={handleInputChange}
+                className='af-select'
+                required
+              >
+                <option value="">Select Size</option>
+                {sizeOptions.map((size) => (
+                  <option key={size} value={size}>
+                    {size}
+                  </option>
+                ))}
+              </select>
+            </div>
+            <div className='af-elmt'>
+              <label htmlFor="price" className='af-label'>Harga</label>
+              <br />
+              <input
+                className='af-text'
+                type="number"
+                id="price"
+                name="price"
+                value={formData.price}
+                onChange={handleInputChange}
+                required
+              />
+            </div>
+            <button type="submit" className='btn af-submit'>Submit</button>
+          </form>
+        </div>
       </Container>
     </div>
   );
