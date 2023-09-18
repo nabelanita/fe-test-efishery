@@ -117,7 +117,7 @@ th, td {
     flex-wrap: wrap; /* Enable flexbox wrap */
     overflow: wrap;
     max-width: 100%;
-    
+
     text-decoration: none;
     list-style: none;
     justify-content: center;
@@ -174,6 +174,7 @@ th, td {
       background-color: white;
       border-radius: 25px;
       padding: 1rem;
+      max-width: 30rem;
     
       .af-elmt {
         display: block;
@@ -193,7 +194,6 @@ th, td {
           font-size: 15px;
           padding: 0.5rem 1rem;
           color: #1a625b;
-          width: 25rem;
         }
         
         .af-select {
@@ -232,6 +232,12 @@ th, td {
 }
 
 @include viewport(mobile-down) {
+  .add-form {
+    .af-form {
+      margin-left: 5px;
+      margin-right: 5px;
+    }
+  }
   .navbar {
     padding: 15px;
     z-index: 9999;
