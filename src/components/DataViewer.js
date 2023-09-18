@@ -63,10 +63,13 @@ function DataViewer() {
       setFilteredData(filtered);
     }
 
+    setCurrentPage(1)
+
   }, [query])
   
   useEffect(() => {
     sortData();
+    setCurrentPage(1)
   }, [sortConfig])
   
 
