@@ -1,5 +1,7 @@
 import React, { useState, useEffect } from 'react';
 
+import SearchBar from './SearchBar';
+
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faSort, faSortUp, faSortDown } from '@fortawesome/free-solid-svg-icons';
 
@@ -7,7 +9,10 @@ const SteinStore = require("stein-js-client");
 
 function DataViewer() {
   const [data, setData] = useState([]);
+  const [filteredData, setFilteredData] = useState(data); // Filtered data
+
   const [currentData, setCurrentData] = useState([]);
+
   const [currentPage, setCurrentPage] = useState(1);
   const [sortConfig, setSortConfig] = useState({ key: null, direction: 'default' });
 
@@ -35,7 +40,7 @@ function DataViewer() {
 
   const sortData = () => {
     const col = sortConfig.key
-    const sorted = [...data].sort((a, b) => {
+    const sorted = [...filteredData].sort((a, b) => {
       if (a[col] && b[col]) {
         if (sortConfig.direction === 'asc') {
           return a[col].localeCompare(b[col], undefined, {
@@ -53,9 +58,9 @@ function DataViewer() {
       }
     });
     if (sortConfig.direction === 'default') {
-      setCurrentData(data);
+      setFilteredData(filteredData);
     } else {
-      setCurrentData(sorted);
+      setFilteredData(sorted);
     }
   }
 
@@ -69,6 +74,17 @@ function DataViewer() {
 
     setSortConfig({ key, direction });
     sortData();
+  };
+
+  const handleSearch = (query) => {
+    const regex = new RegExp(query, 'i');
+    // const filtered = data.filter((item) => regex.test(item.komoditas)); 
+    const filtered = data.filter((item) => {
+      return Object.values(item).some((value) =>
+        regex.test(String(value))
+      );
+    });
+    setFilteredData(filtered);
   };
 
   const renderSortIcon = (col) => {
@@ -85,12 +101,13 @@ function DataViewer() {
 
   const indexOfLastItem = currentPage * itemsPerPage;
   const indexOfFirstItem = indexOfLastItem - itemsPerPage;
-  const currentItems = currentData.slice(indexOfFirstItem, indexOfLastItem);
+  const currentItems = filteredData.slice(indexOfFirstItem, indexOfLastItem);
 
 
   return (
     <div>
-      
+      <SearchBar onSearch={handleSearch}/>
+        <br />
       <table className="table">
         <thead>
           <tr>

@@ -1,18 +1,24 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { FormControl, InputGroup, Button } from 'react-bootstrap';
 import 'bootstrap/dist/css/bootstrap.min.css';
 
-function SearchBar() {
+function SearchBar({ onSearch }) {
+  const [searchQuery, setSearchQuery] = useState('');
+
+   const handleSearch = (e) => {
+    const query = e.target.value;
+    setSearchQuery(query);
+    onSearch(query);
+  };
+
   return (
     <InputGroup className="mb-3">
       <FormControl
-        placeholder="Search data..."
+        placeholder="Cari komoditas/area/ukuran"
         aria-label="Search"
         aria-describedby="search-button"
+        onChange={handleSearch}
       />
-      <Button variant="outline-secondary" id="search-button">
-        Search
-      </Button>
     </InputGroup>
   );
 }
